@@ -1,67 +1,43 @@
+* 欢迎关注微信公众号、长期为您推荐优秀博文、开源项目、视频
+
+* 微信公众号名称：Android干货程序员
+
+* ![](http://upload-images.jianshu.io/upload_images/4037105-8f737b5104dd0b5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 # Timeline-View 
 
-Android Timeline View Library (Using RecyclerView) is simple implementation used to display view like Tracking of shipment/order, steppers etc.
+Android Timeline View Library (使用 RecyclerView) is simple implementation used to display view like Tracking of shipment/order, steppers etc.
 
-### Specs
-[![Download](https://api.bintray.com/packages/vipulasri/maven/TimelineView/images/download.svg)](https://bintray.com/vipulasri/maven/TimelineView/_latestVersion)
-[![MethodsCount](https://img.shields.io/badge/Methods%20and%20size-56%20|%207%20KB-e91e63.svg)](http://www.methodscount.com/?lib=com.github.vipulasri%3Atimelineview%3A1.0.5)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/vipulasri/Timeline-View/blob/master/LICENSE)
-
-### Badges/Featured In
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Timeline--View-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2923) [![Android Gems](http://www.android-gems.com/badge/vipulasri/Timeline-View.svg)](http://www.android-gems.com/lib/vipulasri/Timeline-View?lib_id=773) [![AndroidDev Digest](https://img.shields.io/badge/AndroidDev%20Digest-%23126-blue.svg)](https://www.androiddevdigest.com/digest-126/) 
 
 ![showcase](https://github.com/vipulasri/Timeline-View/blob/master/art/showcase.png)
 
-## Sample Project
 
-You can download the latest sample APK from this repo here: [https://github.com/vipulasri/Timeline-View/tree/master/apk](https://github.com/vipulasri/Timeline-View/tree/master/apk)
 
-For information : checkout [Sample App Code](https://github.com/vipulasri/Timeline-View/tree/master/app) in repository.
+### 使用步骤
 
-## Quick Setup
-
-### 1. Include library
-
-**Using Gradle**
-
-``` gradle
-dependencies {
-    compile 'com.github.vipulasri:timelineview:1.0.5'
-}
+#### 1. 在project的build.gradle添加如下代码(如下图)
 ```
+	allprojects {
+	    repositories {
+	        ...
+	        maven { url "https://jitpack.io" }
+	    }
+	}
+```
+![](http://upload-images.jianshu.io/upload_images/4037105-e7d8b1d836d6cb46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+	
 
-**Using Maven**
-
-``` maven
-<dependency>
-    <groupId>com.github.vipulasri</groupId>
-    <artifactId>timelineview</artifactId>
-    <version>1.0.5</version>
-    <type>pom</type>
-</dependency>
+	
+#### 2. 在Module的build.gradle添加依赖
+```
+     compile 'com.github.open-android:Timeline:0.1.0'
 ```
 
 
-#### Manual:
-**Manual - Using [Android Studio](https://developer.android.com/sdk/installing/studio.html):**
- * Download the library folder and import to your root application folder.
-You can manually achieve this step with 3 steps:
-    1. Paste the folder library into your application at the same level of your app, build and gradle folder
-    2. Add to your settings.gradle file the following code line:
-    "include ':app', ':timelineview'"
-    3. Rebuild the project
- * File → Project Structure → in Modules section click on "app" → Click on tab "Dependecies" → Click on the green plus → Module Dependecy → Select ":library"
- * Done
 
-### What's New
 
-See the project's Releases page for a list of versions with their changelogs.
 
-### [View Releases](https://github.com/vipulasri/Timeline-View/releases)
-
-If you Watch this repository, GitHub will send you an email every time I publish an update.
-
-### 2. Usage
+#### 3. Usage
  * In XML Layout :
 
 ``` java
@@ -86,7 +62,6 @@ If you Watch this repository, GitHub will send you an email every time I publish
     app:line="@color/colorPrimary"
     app:linePadding="5dp"/>
 ```
-
 * Configure using xml attributes or setters in code:
 
     <table>
@@ -130,6 +105,145 @@ If you Watch this repository, GitHub will send you an email every time I publish
         </tr>
     </table>
  
+
+
+#### 实现上面图片一的效果，拷贝如下XML到RecyclerView的Item布局,如下是完整的item布局
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/time_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:markerSize="20dp"
+        app:lineSize="3dp"
+        app:line="@color/colorPrimary"
+        app:linePadding="5dp"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        app:cardElevation="1dp"
+        app:contentPadding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_timeline_date"
+                android:textSize="12sp"
+                tools:text="24 JAN"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/text_timeline_title"
+                android:textColor="@android:color/black"
+                tools:text="Order Successfully Completed"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+```
+#### RecyclerView的Adapter完整代码如下：
+```
+public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
+
+    private List<TimeLineModel> mFeedList;
+    private Context mContext;
+    private Orientation mOrientation;
+    private boolean mWithLinePadding;
+    private LayoutInflater mLayoutInflater;
+
+    public TimeLineAdapter(List<TimeLineModel> feedList, Orientation orientation, boolean withLinePadding) {
+        mFeedList = feedList;
+        mOrientation = orientation;
+        mWithLinePadding = withLinePadding;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return TimelineView.getTimeLineViewType(position,getItemCount());
+    }
+
+    @Override
+    public TimeLineViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        mContext = parent.getContext();
+        mLayoutInflater = LayoutInflater.from(mContext);
+        View view;
+
+        if(mOrientation == Orientation.HORIZONTAL) {
+            view = mLayoutInflater.inflate(mWithLinePadding ? R.layout.item_timeline_horizontal_line_padding : R.layout.item_timeline_horizontal, parent, false);
+        } else {
+            view = mLayoutInflater.inflate(mWithLinePadding ? R.layout.item_timeline_line_padding : R.layout.item_timeline, parent, false);
+        }
+
+        return new TimeLineViewHolder(view, viewType);
+    }
+
+    @Override
+    public void onBindViewHolder(TimeLineViewHolder holder, int position) {
+
+        TimeLineModel timeLineModel = mFeedList.get(position);
+
+        if(timeLineModel.getStatus() == OrderStatus.INACTIVE) {
+            holder.mTimelineView.setMarker(VectorDrawableUtils.getDrawable(mContext, R.drawable.ic_marker_inactive, android.R.color.darker_gray));
+        } else if(timeLineModel.getStatus() == OrderStatus.ACTIVE) {
+            holder.mTimelineView.setMarker(VectorDrawableUtils.getDrawable(mContext, R.drawable.ic_marker_active, R.color.colorPrimary));
+        } else {
+            holder.mTimelineView.setMarker(ContextCompat.getDrawable(mContext, R.drawable.ic_marker), ContextCompat.getColor(mContext, R.color.colorPrimary));
+        }
+
+        if(!timeLineModel.getDate().isEmpty()) {
+            holder.mDate.setVisibility(View.VISIBLE);
+            holder.mDate.setText(DateTimeUtils.parseDateTime(timeLineModel.getDate(), "yyyy-MM-dd HH:mm", "hh:mm a, dd-MMM-yyyy"));
+        }
+        else
+            holder.mDate.setVisibility(View.GONE);
+
+        holder.mMessage.setText(timeLineModel.getMessage());
+    }
+
+    @Override
+    public int getItemCount() {
+        return (mFeedList!=null? mFeedList.size():0);
+    }
+
+}
+```
+#### 上面RecyclerView注意左边时间轴图片，一共是三种状态，空心圆圈，实心圆圈，圆圈里面有一个点，三种状态如下：
+```
+public enum OrderStatus {
+
+    COMPLETED,
+    ACTIVE,
+    INACTIVE;
+
+}
+```
+### 下面的代码都属于核心代码，如果看完上面的完整代码，下面的代码可以忽略
+
 * RecyclerView Holder : 
    Your `RecyclerViewHolder` should have an extra paramenter in constructor i.e viewType from `onCreateViewHolder`. You would also have to call the method `initLine(viewType)` in constructor definition.
  
@@ -169,26 +283,3 @@ If you Watch this repository, GitHub will send you an email every time I publish
     }
 
 ```
-
-## Apps that use this library
-
-If you're using this library in your app and you'd like to list it here,
-Please let me know via [email](mailto:vipulasri.2007@gmail.com), [pull requests](https://github.com/vipulasri/Timeline-View/pulls) or [issues](https://github.com/vipulasri/Timeline-View/issues).
-
-
-## License
-
-
-    Copyright 2017 Vipul Asri
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
